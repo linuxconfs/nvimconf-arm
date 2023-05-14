@@ -1,0 +1,13 @@
+return {
+  {
+    "numToStr/Navigator.nvim",
+    config = function()
+      require("Navigator").setup()
+      vim.api.nvim_set_keymap("n", "<A-h>", "<CMD>NavigatorLeft<CR>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap("n", "<A-l>", "<CMD>NavigatorRight<CR>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap("n", "<A-k>", "<CMD>NavigatorUp<CR>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap("n", "<A-j>", "<CMD>NavigatorDown<CR>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap("n", "<A-p>", "<CMD>NavigatorPrevious<CR>", { noremap = true, silent = true })
+    end,
+  },
+}
