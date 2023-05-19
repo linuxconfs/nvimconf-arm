@@ -24,5 +24,14 @@ lspconfig.gopls.setup({})
 vim.api.nvim_set_keymap("i", "jk", "<Esc>", { noremap = true })
 vim.api.nvim_set_keymap("n", "jk", "<Esc>", { noremap = true })
 vim.api.nvim_set_keymap("v", "jk", "<Esc>", { noremap = true })
-
 --  vim.api.nvim_set_keymap("c", "jk", "<C-c>", { noremap = true })
+-- treesitter
+require("nvim-treesitter.configs").setup({
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      node_incremental = "v",
+      node_decremental = "<BS>",
+    },
+  },
+})
