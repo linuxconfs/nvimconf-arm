@@ -21,9 +21,6 @@ local lspconfig = require("lspconfig")
 lspconfig.gopls.setup({})
 
 -- jk to esc
-vim.api.nvim_set_keymap("i", "jk", "<Esc>", { noremap = true })
-vim.api.nvim_set_keymap("n", "jk", "<Esc>", { noremap = true })
-vim.api.nvim_set_keymap("v", "jk", "<Esc>", { noremap = true })
 vim.api.nvim_set_keymap("v", "p", '"0p', { noremap = true })
 --  vim.api.nvim_set_keymap("c", "jk", "<C-c>", { noremap = true })
 -- treesitter
