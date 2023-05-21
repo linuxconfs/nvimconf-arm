@@ -28,4 +28,5 @@
 | auto cmp 对 grep 不起作用                                               | --                                                          |
 | yank a function 后 paste 在两个方法中间，上下没有空行，需手动加         | formator                                                    |
 | 小窗口打开文件树会占掉大半个屏幕                                        | 据说可以按照百分比，但不晓得lazyvim怎么配                   |
+| tmux 多个 nvim pane，无法知晓哪个pane对应哪个目录或文件                 | 应该可以在 nvim 底部状态栏加上目录标示                      |
 
