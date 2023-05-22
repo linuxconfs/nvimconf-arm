@@ -22,6 +22,7 @@ lspconfig.gopls.setup({})
 
 -- jk to esc
 vim.api.nvim_set_keymap("v", "p", '"0p', { noremap = true })
+vim.api.nvim_set_keymap("n", "<space>ge", "<cmd>Lspsaga diagnostic_jump_next<CR>", { noremap = true })
 --  vim.api.nvim_set_keymap("c", "jk", "<C-c>", { noremap = true })
 -- treesitter
 require("nvim-treesitter.configs").setup({
