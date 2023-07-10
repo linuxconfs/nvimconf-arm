@@ -18,6 +18,10 @@
 | Telescope 想分屏打开一个文件                                           | `<C-v>`                                                                                                                                                                                                                                          |
 | 左上，左下，右 三个分屏，关掉了右边分屏，如何恢复布局                  | 此时分为上下分屏，在上面左右分屏后按`<C-w><S-l>`即可恢复                                                                                                                                                                                         |
 | 一行很长，需要一直按`w`或者`e` | 1. 使用插件`vim-matchup` 可以用 `z%` 快速跳转<br>2. 使用插件`eyeliner.nvim`可以高亮字符方便`f` |
+| 想要用GBrowse分享代码段 | 使用插件`rhubarb.vim` |
+| 在if或者for loop condition中想复制这一段代码 | 可以通过设置tresitter copy condition来实现 |
+| 如何像在sublime和vscode一样全局搜索代码 | 1. 使用插件`ctrlsf.vim` <br>2. 使用插件`nvim-spectre` |
+| 如何substitute swap | 1. `:%s/\v(foo|bar)/\={'foo':'bar','bar':'foo'}[submatch(0)]/g` <br>2. `:s/map[\(.*)]\(.*)/map[\2]\1/g` <br>3. `:s/a.*/"&"<CR>ZZ` |
 
 ## 未妥善解决
 
