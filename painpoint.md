@@ -19,7 +19,8 @@
 | 左上，左下，右 三个分屏，关掉了右边分屏，如何恢复布局                  | 此时分为上下分屏，在上面左右分屏后按`<C-w><S-l>`即可恢复                                                                                                                                                                                         |
 | 一行很长，需要一直按`w`或者`e` | 1. 使用插件`vim-matchup` 可以用 `z%` 快速跳转<br>2. 使用插件`eyeliner.nvim`可以高亮字符方便`f` |
 | 想要用GBrowse分享代码段 | 使用插件`rhubarb.vim` |
-| 在if或者for loop condition中想复制这一段代码 | 可以通过设置tresitter copy condition来实现 |
+| 在if或者for loop conditional中想复制这一段代码 | 1. 可以通过设置tresitter copy condition来实现，如果使用lazyvim，可以参考 [这篇](https://github.com/LazyVim/LazyVim/issues/282#issuecomment-1433300058) 来覆盖 <br>2. lazyvim目前使用mini.ai的textobj，所以可以直接`yao`来copy一个conditional block |
+| 想要覆盖lazy vim中某些插件的配置 | [init = function()即可](https://github.com/LazyVim/LazyVim/issues/282#issuecomment-1433300058) |
 | 如何像在sublime和vscode一样全局搜索代码 | 1. 使用插件`ctrlsf.vim` <br>2. 使用插件`nvim-spectre` |
 | 如何substitute swap | 1. `:%s/\v(foo|bar)/\={'foo':'bar','bar':'foo'}[submatch(0)]/g` <br>2. `:s/map[\(.*)]\(.*)/map[\2]\1/g` <br>3. `:s/a.*/"&"<CR>ZZ` |
 
