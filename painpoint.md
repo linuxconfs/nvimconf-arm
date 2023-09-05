@@ -23,7 +23,7 @@
 | 想要覆盖lazy vim中某些插件的配置 | [init = function()即可](https://github.com/LazyVim/LazyVim/issues/282#issuecomment-1433300058) |
 | 如何像在sublime和vscode一样全局搜索代码 | 1. 使用插件`ctrlsf.vim` <br>2. 使用插件`nvim-spectre` |
 | 如何substitute swap | 1. `:%s/\v(foo|bar)/\={'foo':'bar','bar':'foo'}[submatch(0)]/g` <br>2. `:s/map[\(.*)]\(.*)/map[\2]\1/g` <br>3. `:s/a.*/"&"<CR>ZZ` |
-| 不想让lsp自动格式化文件 | [在init.lua加入这些代码](https://github.com/bmewburn/vscode-intelephense/issues/2003#issuecomment-1555040833) |
+| 不想让lsp自动格式化文件 | [在init.lua加入这些代码，把nvim_lsp改成require("lspconfig")](https://github.com/bmewburn/vscode-intelephense/issues/2003#issuecomment-1555040833) |
 
 ## 未妥善解决
 
