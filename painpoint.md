@@ -31,7 +31,36 @@
 
 | 痛点 | 解决 |
 |-----|------|
-| 在shell环境想要cd到有很多名称相似的目录会很麻烦，<br>比如有4个目录: /etc/a_b, /etc/a_b_c, /etc/a_b_e, /etc/a_e 。<br>这里想进入/etc/a_b_e, 就不得不完整输入路径，而不能使用自动补全 | 1. bash+fzf: `cd $(find . -type d | fzf )` ; `find . -type d | fzf | read dir && cd "$dir"` <br>2. autojump或者 [zoxide](https://github.com/ajeetdsouza/zoxide)<br>3. linux杀招cdpath: `export CDPATH=$HOME:$HOME/project:$HOME/project/container/alb-container:$HOME/sidepro` |
+| 在shell环境想要cd到有很多名称相似的目录会很麻烦，<br>比如有4个目录: /etc/a_b, /etc/a_b_c, /etc/a_b_e, /etc/a_e 。<br>这里想进入/etc/a_b_e, 就不得不完整输入路径，而不能使用自动补全 | 1. bash+fzf: `cd $(find . -type d | fzf )` ; `find . -type d | fzf | read dir && cd "$dir"` 具体操作见block1 <br>2. autojump或者 [zoxide](https://github.com/ajeetdsouza/zoxide)<br>3. linux杀招cdpath: `export CDPATH=$HOME:$HOME/project:$HOME/project/container/alb-container:$HOME/sidepro` |
+
+**block1**
+
+```bash
+# 在~/.bash_profile添加一下code
+function ccd() {
+  cd $(find "${1:-.}/" -type d | fzf)
+}
+function lsd() {
+  ls $(find "${1:-.}/" -type d | fzf)
+}
+function lld() {
+  ls -l $(find "${1:-.}/" -type d | fzf)
+}
+function taild() {
+  local cmd="tail"
+  if [[ "$1" == "-f" ]]; then
+    cmd="tail -f"
+    shift
+  fi
+  if [[ "$1" == "-n" ]]; then
+    cmd="tail -n $2"
+    shift 2
+  fi
+  local selected_dir
+  selected_dir=$(find "${1:-.}/" -type f | fzf)
+  eval $cmd "$selected_dir"
+}
+```
 
 ## 未妥善解决
 
