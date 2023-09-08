@@ -2,6 +2,8 @@
 
 ## 已解决
 
+### nvim
+
 | 痛点                                                                   | 解决                                                                                                                                                                                                                                             |
 |------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `vawp` 进行单词替换后剪切板里的内容被取缔了，想重复替换时需要再次 yank | 用寄存器 `vaw"0p` 可以粘贴上次拷贝内容<br>因此可以绑定 `keymap("v", "p", '"0p')`                                                                                                                                                                 |
@@ -24,6 +26,12 @@
 | 如何像在sublime和vscode一样全局搜索代码 | 1. 使用插件`ctrlsf.vim` <br>2. 使用插件`nvim-spectre` |
 | 如何substitute swap | 1. `:%s/\v(foo|bar)/\={'foo':'bar','bar':'foo'}[submatch(0)]/g` <br>2. `:s/map[\(.*)]\(.*)/map[\2]\1/g` <br>3. `:s/a.*/"&"<CR>ZZ` |
 | 不想让lsp自动格式化文件 | 方法1. [在init.lua加入这些代码，把nvim_lsp改成require("lspconfig")](https://github.com/bmewburn/vscode-intelephense/issues/2003#issuecomment-1555040833) <br>方法2. [disable auto format of lsp](https://www.reddit.com/r/neovim/comments/12rn5zr/disable_autoformat_in_lazyvim/) |
+
+### shell
+
+| 痛点 | 解决 |
+|-----|------|
+| 在shell环境想要cd到有很多名称相似的目录会很麻烦，<br>比如有4个目录: /etc/a_b, /etc/a_b_c, /etc/a_b_e, /etc/a_e 。<br>这里想进入/etc/a_b_e, 就不得不完整输入路径，而不能使用自动补全 | 1. bash+fzf: `cd $(find . -type d | fzf )` ; `find . -type d | fzf | read dir && cd "$dir"` <br>2. autojump或者 [zoxide](https://github.com/ajeetdsouza/zoxide)<br>3. linux杀招cdpath: `export CDPATH=$HOME:$HOME/project:$HOME/project/container/alb-container:$HOME/sidepro` |
 
 ## 未妥善解决
 
