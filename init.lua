@@ -35,4 +35,7 @@ require("nvim-treesitter.configs").setup({
   },
 })
 
+vim.defer_fn(function()
+  vim.api.nvim_set_hl(0, "TSVariable", { link = "Normal" })
+end, 10000)
 vim.api.nvim_set_hl(0, "@comment", { fg = "green" })
