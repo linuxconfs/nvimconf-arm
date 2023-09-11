@@ -36,15 +36,19 @@
 **block1**
 
 ```bash
+# require fzf, fd-find
+brew install fd
+brew install fzf
+
 # 在~/.bash_profile添加一下code
 function ccd() {
-  cd $(find "${1:-.}/" -type d | fzf)
+  cd $(fd --full-path "${1:-.}" --type d | fzf)
 }
 function lsd() {
-  ls $(find "${1:-.}/" -type d | fzf)
+  ls $(fd --full-path "${1:-.}" --type d | fzf)
 }
 function lld() {
-  ls -l $(find "${1:-.}/" -type d | fzf)
+  ls -l $(fd --full-path "${1:-.}" --type d | fzf)
 }
 function taild() {
   local cmd="tail"
@@ -57,7 +61,7 @@ function taild() {
     shift 2
   fi
   local selected_dir
-  selected_dir=$(find "${1:-.}/" -type f | fzf)
+  selected_dir=$(fd --full-path "${1:-.}" --type f | fzf)
   eval $cmd "$selected_dir"
 }
 ```
