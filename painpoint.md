@@ -42,13 +42,13 @@ brew install fzf
 
 # 在~/.bash_profile添加一下code
 function ccd() {
-  cd $(fd -t d . "${1:-.}" | fzf)
+  cd $(fd -L -t d . "${1:-.}" | fzf --height 10)
 }
 function lsd() {
-  ls $(fd -t d . "${1:-.}" | fzf)
+  ls $(fd -L -t d . "${1:-.}" | fzf --height 10)
 }
 function lld() {
-  ls -l $(fd -t d . "${1:-.}" | fzf)
+  ls -l $(fd -L -t d . "${1:-.}" | fzf --height 10)
 }
 function taild() {
   local cmd="tail"
@@ -61,7 +61,7 @@ function taild() {
     shift 2
   fi
   local selected_dir
-  selected_dir=$(fd -t d . "${1:-.}" | fzf)
+  selected_dir=$(fd -L -t f . "${1:-.}" | fzf --height 10)
   eval $cmd "$selected_dir"
 }
 ```
