@@ -8,14 +8,14 @@ require("config.lazy")
 vim.cmd.colorscheme("base16-tender")
 -- vim.o.termguicolors = true
 
-local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.go",
-  callback = function()
-    require("go.format").goimport()
-  end,
-  group = format_sync_grp,
-})
+-- local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--   pattern = "*.go",
+--   callback = function()
+--     require("go.format").goimport()
+--   end,
+--   group = format_sync_grp,
+-- })
 
 local lspconfig = require("lspconfig")
 lspconfig.gopls.setup({})
@@ -38,4 +38,5 @@ require("nvim-treesitter.configs").setup({
 vim.defer_fn(function()
   vim.api.nvim_set_hl(0, "TSVariable", { link = "Normal" })
 end, 10000)
-vim.api.nvim_set_hl(0, "@comment", { fg = "green" })
+
+vim.cmd("hi Comment guifg=green")
