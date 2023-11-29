@@ -26,6 +26,7 @@
 | 如何像在sublime和vscode一样全局搜索代码 | 1. 使用插件`ctrlsf.vim` <br>2. 使用插件`nvim-spectre` |
 | 如何substitute swap | 1. `:%s/\v(foo|bar)/\={'foo':'bar','bar':'foo'}[submatch(0)]/g` <br>2. `:s/map[\(.*)]\(.*)/map[\2]\1/g` <br>3. `:s/a.*/"&"<CR>ZZ` |
 | 不想让lsp自动格式化文件 | 方法1. [在init.lua加入这些代码，把nvim_lsp改成require("lspconfig")](https://github.com/bmewburn/vscode-intelephense/issues/2003#issuecomment-1555040833) <br>方法2. [disable auto format of lsp](https://www.reddit.com/r/neovim/comments/12rn5zr/disable_autoformat_in_lazyvim/) |
+| nvim 用dbext或dadbod时查询出来的结果是乱码 | 其实是本机mysql client的问题，需要按block2配置/etc/my.cnf |
 
 ### shell
 
@@ -64,6 +65,22 @@ function taild() {
   selected_dir=$(fd -L -t f . "${1:-.}" | fzf --height 10)
   eval $cmd "$selected_dir"
 }
+```
+
+**block2**
+
+``` cnf
+[client]
+default-character-set=utf8
+
+[mysql]
+default-character-set=utf8
+
+
+[mysqld]
+collation-server = utf8_unicode_ci
+init-connect='SET NAMES utf8'
+character-set-server = utf8
 ```
 
 ## 未妥善解决
