@@ -24,9 +24,12 @@
 | 在if或者for loop conditional中想复制这一段代码 | 1. 可以通过设置tresitter copy condition来实现，如果使用lazyvim，可以参考 [这篇](https://github.com/LazyVim/LazyVim/issues/282#issuecomment-1433300058) 来覆盖 <br>2. lazyvim目前使用mini.ai的textobj，所以可以直接`yao`来copy一个conditional block |
 | 想要覆盖lazy vim中某些插件的配置 | [init = function()即可](https://github.com/LazyVim/LazyVim/issues/282#issuecomment-1433300058) |
 | 如何像在sublime和vscode一样全局搜索代码 | 1. 使用插件`ctrlsf.vim` <br>2. 使用插件`nvim-spectre` |
+| substitute有时候要输入很多转义字符，很麻烦 | 可以用magic和very magic模式，也就是\v |
 | 如何substitute swap | 1. `:%s/\v(foo|bar)/\={'foo':'bar','bar':'foo'}[submatch(0)]/g` <br>2. `:s/map[\(.*)]\(.*)/map[\2]\1/g` <br>3. `:s/a.*/"&"<CR>ZZ` |
 | 不想让lsp自动格式化文件 | 方法1. [在init.lua加入这些代码，把nvim_lsp改成require("lspconfig")](https://github.com/bmewburn/vscode-intelephense/issues/2003#issuecomment-1555040833) <br>方法2. [disable auto format of lsp](https://www.reddit.com/r/neovim/comments/12rn5zr/disable_autoformat_in_lazyvim/) |
 | nvim 用dbext或dadbod时查询出来的结果是乱码 | 其实是本机mysql client的问题，需要按block2配置/etc/my.cnf |
+| * 同一个项目可能需要多个分支来开发不同功能，切环境总是麻烦 | 可以使用nvim的auto-session和session-len插件来管理多session，用git worktree来管理多分支环境，用lazygit最新版来可视化管理worktree |
+| * 有多个split窗口时，有时想全屏其中一个窗口但不关闭其它窗口进行开发或展示（类似:on，但:on会关闭其它窗口） | 使用插件'szw/vim-maximizer'可以做到 |
 
 ### shell
 
@@ -35,6 +38,8 @@
 | 在shell环境想要cd到有很多名称相似的目录会很麻烦，<br>比如有4个目录: /etc/a_b, /etc/a_b_c, /etc/a_b_e, /etc/a_e 。<br>这里想进入/etc/a_b_e, 就不得不完整输入路径，而不能使用自动补全 | 1. bash+fzf: `cd $(find . -type d | fzf )` ; `find . -type d | fzf | read dir && cd "$dir"` 具体操作见block1 <br>2. autojump或者 [zoxide](https://github.com/ajeetdsouza/zoxide)<br>3. linux杀招cdpath: `export CDPATH=$HOME:$HOME/project:$HOME/project/container/alb-container:$HOME/sidepro` |
 
 **block1**
+
+bash:
 
 ```bash
 # require fzf, fd-find
@@ -67,6 +72,30 @@ function taild() {
 }
 ```
 
+zsh 更完善版:
+
+``` zsh
+function ccd() {
+  print -z "cd $(fd -L -t d . "${1:-.}" | fzf --height 10)"
+}
+function lsd() {
+  print -z "ls $(fd -L -t d . "${1:-.}" | fzf --height 10)"
+}
+function lld() {
+  print -z "ls -l $(fd -L -t d . "${1:-.}" | fzf --height 10)"
+}
+function catd() {
+  print -z "cat $(fd -L -t f . "${1:-.}" | fzf --height 10)"
+}
+function taild() {
+  local selected_dir
+  selected_dir=$(fd -L -t f . "${@[$#]}" | fzf --height 10)
+  print -z "tail $@[1,-2] $selected_dir"
+}
+```
+
+后续可考虑加上缓存，加速搜索。以及支持隐藏目录。
+
 **block2**
 
 ``` cnf
@@ -92,6 +121,6 @@ character-set-server = utf8
 | 在ipad上使用nvim时yank不到系统剪切板                                    | --                                                          |
 | auto cmp 对 grep 不起作用                                               | --                                                          |
 | yank a function 后 paste 在两个方法中间，上下没有空行，需手动加         | formator                                                    |
-| 小窗口打开文件树会占掉大半个屏幕                                        | 据说可以按照百分比，但不晓得lazyvim怎么配                   |
+| 小窗口打开文件树会占掉大半个屏幕                                        | 据说可以按照百分比，但不晓得lazyvim怎么配  (可以用mini-files代替)                  |
 | tmux 多个 nvim pane，无法知晓哪个pane对应哪个目录或文件                 | 应该可以在 nvim 底部状态栏加上目录标示                      |
 
