@@ -41,6 +41,8 @@
 
 bash:
 
+> 这里 fd -I 可以搜索git ignore的文件，-u可以搜索隐藏文件
+
 ```bash
 # require fzf, fd-find
 brew install fd
@@ -48,13 +50,13 @@ brew install fzf
 
 # 在~/.bash_profile添加一下code
 function ccd() {
-  cd $(fd -L -t d . "${1:-.}" | fzf --height 10)
+  cd $(fd -L -I -t d . "${1:-.}" | fzf --height 10)
 }
 function lsd() {
-  ls $(fd -L -t d . "${1:-.}" | fzf --height 10)
+  ls $(fd -L -I -t d . "${1:-.}" | fzf --height 10)
 }
 function lld() {
-  ls -l $(fd -L -t d . "${1:-.}" | fzf --height 10)
+  ls -l $(fd -L -I -t d . "${1:-.}" | fzf --height 10)
 }
 function taild() {
   local cmd="tail"
@@ -67,7 +69,7 @@ function taild() {
     shift 2
   fi
   local selected_dir
-  selected_dir=$(fd -L -t f . "${1:-.}" | fzf --height 10)
+  selected_dir=$(fd -L -I -t f . "${1:-.}" | fzf --height 10)
   eval $cmd "$selected_dir"
 }
 ```
@@ -76,20 +78,20 @@ zsh 更完善版:
 
 ``` zsh
 function ccd() {
-  print -z "cd $(fd -L -t d . "${1:-.}" | fzf --height 10)"
+  print -z "cd $(fd -I -L -t d . "${1:-.}" | fzf --height 10)"
 }
 function lsd() {
-  print -z "ls $(fd -L -t d . "${1:-.}" | fzf --height 10)"
+  print -z "ls $(fd -I -L -t d . "${1:-.}" | fzf --height 10)"
 }
 function lld() {
-  print -z "ls -l $(fd -L -t d . "${1:-.}" | fzf --height 10)"
+  print -z "ls -l $(fd -I -L -t d . "${1:-.}" | fzf --height 10)"
 }
 function catd() {
-  print -z "cat $(fd -L -t f . "${1:-.}" | fzf --height 10)"
+  print -z "cat $(fd -I -L -t f . "${1:-.}" | fzf --height 10)"
 }
 function taild() {
   local selected_dir
-  selected_dir=$(fd -L -t f . "${@[$#]}" | fzf --height 10)
+  selected_dir=$(fd -I -L -t f . "${@[$#]}" | fzf --height 10)
   print -z "tail $@[1,-2] $selected_dir"
 }
 ```
