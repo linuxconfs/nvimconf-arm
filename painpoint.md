@@ -30,6 +30,7 @@
 | nvim 用dbext或dadbod时查询出来的结果是乱码 | 其实是本机mysql client的问题，需要按block2配置/etc/my.cnf |
 | * 同一个项目可能需要多个分支来开发不同功能，切环境总是麻烦 | 可以使用nvim的auto-session和session-len插件来管理多session，用git worktree来管理多分支环境，用lazygit最新版来可视化管理worktree |
 | * 有多个split窗口时，有时想全屏其中一个窗口但不关闭其它窗口进行开发或展示（类似:on，但:on会关闭其它窗口） | 使用插件'szw/vim-maximizer'可以做到 |
+| 有多个monitors时，很难切换focus的monitor，需要用鼠标 | 可以用yabai+skhd，快捷键配置参考block3 |
 
 ### shell
 
@@ -112,6 +113,17 @@ default-character-set=utf8
 collation-server = utf8_unicode_ci
 init-connect='SET NAMES utf8'
 character-set-server = utf8
+```
+
+**block3**
+
+安装过程：https://www.josean.com/posts/yabai-setup
+
+```cnf
+cmd - h : yabai -m window --focus west || yabai -m display --focus west
+cmd - j : yabai -m window --focus south || yabai -m display --focus south
+cmd - k : yabai -m window --focus north || yabai -m display --focus north
+cmd - l : yabai -m window --focus east || yabai -m display --focus east
 ```
 
 ## 未妥善解决
