@@ -31,6 +31,8 @@
 | * 同一个项目可能需要多个分支来开发不同功能，切环境总是麻烦 | 可以使用nvim的auto-session和session-len插件来管理多session，用git worktree来管理多分支环境，用lazygit最新版来可视化管理worktree |
 | * 有多个split窗口时，有时想全屏其中一个窗口但不关闭其它窗口进行开发或展示（类似:on，但:on会关闭其它窗口） | 使用插件'szw/vim-maximizer'可以做到 |
 | 有多个monitors时，很难切换focus的monitor，需要用鼠标 | 可以用yabai+skhd，快捷键配置参考block3 |
+| 在ssh到远程主机且打开tmux的情况下无法yank内容到本机剪切板clipboard | [背景](https://github.com/LazyVim/LazyVim/commit/1c9f4160a22dbdca2db36169460fcf28641607e7)：LazyVim v10.13关闭ssh clipboard<br>1. 使用支持OSC52的terminal，比如wezterm<br>2. 将[tmux设置成支持OSC52](https://github.com/tmux/tmux/wiki/Clipboard#quick-summary)，切记set clipboard = on<br>3. neovim老版本使用[osc52插件](https://github.com/ojroques/nvim-osc52)，实现方法支持自动复制 |
+| 如何copy ssh到的远端主机上的文本内容 | 可以用it2copy等命令行工具，核心原理也是OSC52 |
 
 ### shell
 
