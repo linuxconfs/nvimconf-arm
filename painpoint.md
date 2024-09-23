@@ -33,6 +33,7 @@
 | 有多个monitors时，很难切换focus的monitor，需要用鼠标 | 可以用yabai+skhd，快捷键配置参考block3 |
 | 在ssh到远程主机且打开tmux的情况下无法yank内容到本机剪切板clipboard | [背景](https://github.com/LazyVim/LazyVim/commit/1c9f4160a22dbdca2db36169460fcf28641607e7)：LazyVim v10.13关闭ssh clipboard<br>1. 使用支持OSC52的terminal，比如wezterm<br>2. 将[tmux设置成支持OSC52](https://github.com/tmux/tmux/wiki/Clipboard#quick-summary)，切记set clipboard = on<br>3. neovim老版本使用[osc52插件](https://github.com/ojroques/nvim-osc52)，实现方法支持自动复制 |
 | 如何copy ssh到的远端主机上的文本内容 | 可以用it2copy等命令行工具，核心原理也是OSC52 |
+| neovim下如何进入select模式在function的参数间按tab跳转 | 可以使用block4里面的keymap |
 
 ### shell
 
@@ -126,6 +127,14 @@ cmd - h : yabai -m window --focus west || yabai -m display --focus west
 cmd - j : yabai -m window --focus south || yabai -m display --focus south
 cmd - k : yabai -m window --focus north || yabai -m display --focus north
 cmd - l : yabai -m window --focus east || yabai -m display --focus east
+```
+
+**block4**
+
+``` lua
+vim.api.nvim_set_keymap("i", "<tab><tab>", '<ESC>:normal ]avia<c-g><CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<tab><tab>", ':normal ]avia<c-g><CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("s", "<tab><tab>", '<ESC>:normal ]avia<c-g><CR>', { noremap = true, silent = true })
 ```
 
 ## 未妥善解决
