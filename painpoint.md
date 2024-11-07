@@ -34,12 +34,7 @@
 | 在ssh到远程主机且打开tmux的情况下无法yank内容到本机剪切板clipboard | [背景](https://github.com/LazyVim/LazyVim/commit/1c9f4160a22dbdca2db36169460fcf28641607e7)：LazyVim v10.13关闭ssh clipboard<br>1. 使用支持OSC52的terminal，比如wezterm<br>2. 将[tmux设置成支持OSC52](https://github.com/tmux/tmux/wiki/Clipboard#quick-summary)，切记set clipboard = on<br>3. neovim老版本使用[osc52插件](https://github.com/ojroques/nvim-osc52)，实现方法支持自动复制 |
 | 如何copy ssh到的远端主机上的文本内容 | 可以用it2copy等命令行工具，核心原理也是OSC52 |
 | neovim下如何进入select模式在function的参数间按tab跳转 | 可以使用block4里面的keymap |
-| 直接更新全部插件，不知道是哪一个插件导致的问题，只能先check health和看vim log，有没有快捷方法？ | 可以尝试分以下5个step解决：
-1. 回滚到更新前的状态
-2. 检查breaking change和许久未更新的插件，问题大多出在这些插件里面
-3. 逐个更新，用排除法定位问题插件
-4. 再用二分法定位问题插件的问题commit
-5. 在插件仓库提Issue或者Pull Request解决问题 |
+| 直接更新全部插件，不知道是哪一个插件导致的问题，只能先check health和看vim log，有没有快捷方法？ | 可以尝试分以下5个step解决：<br>1. 回滚到更新前的状态<br>2. 检查breaking change和许久未更新的插件，问题大多出在这些插件里面<br>3. 逐个更新，用排除法定位问题插件<br>4. 再用二分法定位问题插件的问题commit<br>5. 在插件仓库提Issue或者Pull Request解决问题 |
 
 ### shell
 
