@@ -35,6 +35,7 @@
 | 如何copy ssh到的远端主机上的文本内容 | 可以用it2copy等命令行工具，核心原理也是OSC52 |
 | neovim下如何进入select模式在function的参数间按tab跳转 | 可以使用block4里面的keymap |
 | 直接更新全部插件，不知道是哪一个插件导致的问题，只能先check health和看vim log，有没有快捷方法？ | 可以尝试分以下5个step解决：<br>1. 回滚到更新前的状态<br>2. 检查breaking change和许久未更新的插件，问题大多出在这些插件里面<br>3. 逐个更新，用排除法定位问题插件<br>4. 再用二分法定位问题插件的问题commit<br>5. 在插件仓库提Issue或者Pull Request解决问题 |
+| yaf时无法复制上下空行，粘贴时总是需要手动创建空行 | [参考文档](https://neovim.io/doc/user/treesitter.html#treesitter-query-modeline-extends), [参考commit](https://github.com/linuxconfs/nvimconf/commit/dcfb8b37f440258f90f3da01fce554ffe3533d07) |
 
 ### shell
 
