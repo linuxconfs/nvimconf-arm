@@ -103,6 +103,28 @@ function taild() {
 }
 ```
 
+fzf 超级优化版：
+
+```
+function ccd() {
+  print -z "cd $(fd -I -L -t d . "''${1:-.}" | fzf --bind 'ctrl-g:select-all+reload(cat {+f})+clear-query' --multi --height 10)"
+}
+function lsd() {
+  print -z "ls $(fd -I -L -t d . "''${1:-.}" | fzf --bind 'ctrl-g:select-all+reload(cat {+f})+clear-query' --multi --height 10)"
+}
+function lld() {
+  print -z "ls -l $(fd -I -L -t d . "''${1:-.}" | fzf --bind 'ctrl-g:select-all+reload(cat {+f})+clear-query' --multi --height 10)"
+}
+function catd() {
+  print -z "cat $(fd -I -L -t f . "''${1:-.}" | fzf --bind 'ctrl-g:select-all+reload(cat {+f})+clear-query' --multi --height 10)"
+}
+function taild() {
+  local selected_dir
+  selected_dir=$(fd -I -L -t f . "''${@[$#]}" | fzf --bind 'ctrl-g:select-all+reload(cat {+f})+clear-query' --multi --height 10)
+  print -z "tail $@[1,-2] $selected_dir"
+}
+```
+
 后续可考虑加上缓存，加速搜索。以及支持隐藏目录。
 
 **block2**
