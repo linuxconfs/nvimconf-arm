@@ -103,25 +103,40 @@ function taild() {
 }
 ```
 
-fzf 超级优化版：
+fzf，转义 超级优化版：
 
 ```
 function ccd() {
-  print -z "cd $(fd -I -L -t d . "''${1:-.}" | fzf --bind 'ctrl-g:select-all+reload(cat {+f})+clear-query' --multi --height 10)"
+  selected_dir=$(fd -I -L -t d . "''${1:-.}" | fzf --bind 'ctrl-g:select-all+reload(cat {+f})+clear-query' --multi --height 10)
+  selected_dir=$(echo "$selected_dir" | sed 's/[](){}&|<>^$!`\\ ]/\\\\\\&/g')
+  print -z "cd $selected_dir"
 }
 function lsd() {
-  print -z "ls $(fd -I -L -t d . "''${1:-.}" | fzf --bind 'ctrl-g:select-all+reload(cat {+f})+clear-query' --multi --height 10)"
+  selected_dir=$(fd -I -L -t d . "''${1:-.}" | fzf --bind 'ctrl-g:select-all+reload(cat {+f})+clear-query' --multi --height 10)
+  selected_dir=$(echo "$selected_dir" | sed 's/[](){}&|<>^$!`\\ ]/\\\\\\&/g')
+  print -z "ls $selected_dir"
 }
 function lld() {
-  print -z "ls -l $(fd -I -L -t d . "''${1:-.}" | fzf --bind 'ctrl-g:select-all+reload(cat {+f})+clear-query' --multi --height 10)"
+  selected_dir=$(fd -I -L -t d . "''${1:-.}" | fzf --bind 'ctrl-g:select-all+reload(cat {+f})+clear-query' --multi --height 10)
+  selected_dir=$(echo "$selected_dir" | sed 's/[](){}&|<>^$!`\\ ]/\\\\\\&/g')
+  print -z "ls -l $selected_dir"
 }
 function catd() {
-  print -z "cat $(fd -I -L -t f . "''${1:-.}" | fzf --bind 'ctrl-g:select-all+reload(cat {+f})+clear-query' --multi --height 10)"
+  selected_dir=$(fd -I -L -t f . "''${1:-.}" | fzf --bind 'ctrl-g:select-all+reload(cat {+f})+clear-query' --multi --height 10)
+  selected_dir=$(echo "$selected_dir" | sed 's/[](){}&|<>^$!`\\ ]/\\\\\\&/g')
+  print -z "cat $selected_dir"
 }
 function taild() {
   local selected_dir
-  selected_dir=$(fd -I -L -t f . "''${@[$#]}" | fzf --bind 'ctrl-g:select-all+reload(cat {+f})+clear-query' --multi --height 10)
+  selected_dir=$(fd -I -L -t f . "''${@[$#]:-.}" | fzf --bind 'ctrl-g:select-all+reload(cat {+f})+clear-query' --multi --height 10)
+  selected_dir=$(echo "$selected_dir" | sed 's/[](){}&|<>^$!`\\ ]/\\\\\\&/g')
   print -z "tail $@[1,-2] $selected_dir"
+}
+function headd() {
+  local selected_dir
+  selected_dir=$(fd -I -L -t f . "''${@[$#]:-.}" | fzf --bind 'ctrl-g:select-all+reload(cat {+f})+clear-query' --multi --height 10)
+  selected_dir=$(echo "$selected_dir" | sed 's/[](){}&|<>^$!`\\ ]/\\\\\\&/g')
+  print -z "head $@[1,-2] $selected_dir"
 }
 ```
 
